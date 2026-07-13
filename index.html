@@ -1,42 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Tiny Question 💌</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>A Little Surprise 💌</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div id="card">
-    <h2>Hey, you... 💗</h2>
-    <p>I have a tiny question...</p>
+    <!-- Floating Hearts -->
+    <div class="hearts"></div>
 
-    <button id="open">
-        Open 💌
-    </button>
-</div>
+    <!-- Sparkles -->
+    <div class="sparkles"></div>
 
-<div id="question" class="hidden">
+    <!-- Landing Page -->
+    <section id="landing">
 
-    <h1>Would you like to go on a date with me? 🌸</h1>
+        <div class="glass">
 
-    <div class="buttons">
-        <button id="yes">YES! 💖</button>
-        <button id="no">No 🙈</button>
-    </div>
+            <div class="envelope">
+                💌
+            </div>
 
-    <div id="yay" class="hidden">
-        <h1>🎉 YAYYYY!! 🥹❤️</h1>
-        <p>It's a date then! 🌷</p>
-        <p>✨ I can't wait!</p>
-    </div>
+            <h1>A little surprise for <span>Teena</span> 💗</h1>
 
-</div>
+            <p>Someone has something special to ask you...</p>
 
-<canvas id="fx"></canvas>
+            <button id="openBtn">
+                Open ✨
+            </button>
 
-<script src="script.js"></script>
+        </div>
+
+    </section>
+
+    <!-- Question Section -->
+
+    <section id="questionPage" class="hidden">
+
+        <div class="glass questionBox">
+
+            <h3 id="typing"></h3>
+
+            <h1 class="question">
+
+                Would you like to go on a date with me? 🌸
+
+            </h1>
+
+            <div class="buttons">
+
+                <button id="yesBtn">
+                    💖 YES!
+                </button>
+
+                <button id="noBtn">
+                    🙈 No
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Success Page -->
+
+    <section id="success" class="hidden">
+
+        <div class="glass successBox">
+
+            <h1>🥹💖</h1>
+
+            <h2>YAYYYYY!!</h2>
+
+            <p>
+
+                It's a date, <b>Teena!</b> 🌸
+
+            </p>
+
+            <p>
+
+                I seriously can't wait! ❤️
+
+            </p>
+
+            <button id="music">
+
+                🎵 Play Our Song
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- Canvas for Fireworks -->
+
+    <canvas id="canvas"></canvas>
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
