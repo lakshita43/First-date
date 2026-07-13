@@ -1,0 +1,115 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffd6e7,#ffeef5,#fff8fb);
+    overflow:hidden;
+}
+
+#card,#question{
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(12px);
+    padding:40px;
+    border-radius:25px;
+    width:90%;
+    max-width:500px;
+    text-align:center;
+    box-shadow:0 10px 40px rgba(255,105,180,.25);
+    animation:fadeIn .8s ease;
+}
+
+.hidden{
+    display:none;
+}
+
+h1{
+    color:#ff3d7f;
+    margin-bottom:20px;
+}
+
+h2{
+    color:#ff4f9a;
+    margin-bottom:15px;
+}
+
+p{
+    color:#555;
+    font-size:18px;
+    margin-bottom:20px;
+}
+
+button{
+    padding:14px 28px;
+    border:none;
+    border-radius:40px;
+    cursor:pointer;
+    font-size:18px;
+    transition:.3s;
+    margin:10px;
+}
+
+#open{
+    background:#ff4f9a;
+    color:white;
+}
+
+#yes{
+    background:#ff4f9a;
+    color:white;
+}
+
+#yes:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 20px #ff8ec5;
+}
+
+#no{
+    background:white;
+    color:#ff4f9a;
+    border:2px solid #ff4f9a;
+    position:relative;
+}
+
+#yay{
+    margin-top:30px;
+    animation:pop .5s ease;
+}
+
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes pop{
+    from{
+        transform:scale(.6);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
