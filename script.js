@@ -1,102 +1,230 @@
-const openBtn = document.getElementById("open");
-const card = document.getElementById("card");
-const question = document.getElementById("question");
+const landing = document.getElementById("landing");
+const questionPage = document.getElementById("questionPage");
+const success = document.getElementById("success");
 
-const yesBtn = document.getElementById("yes");
-const noBtn = document.getElementById("no");
+const openBtn = document.getElementById("openBtn");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
 
-const yay = document.getElementById("yay");
+const typing = document.getElementById("typing");
+const musicBtn = document.getElementById("music");
 
-const canvas = document.getElementById("fx");
-const ctx = canvas.getContext("2d");
+const messages = [
+    "🥺 Really?",
+    "Pretty please? 🌸",
+    "Think again 💕",
+    "Come on 😭",
+    "Nice try 😂",
+    "You can't catch me!"
+];
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+let msg = 0;
 
-// Open the envelope
+// ---------- Open Letter ----------
+
 openBtn.addEventListener("click", () => {
-    card.classList.add("hidden");
-    question.classList.remove("hidden");
-});
 
-// Make NO button run away
-noBtn.addEventListener("mouseover", () => {
+    landing.classList.add("hidden");
 
-    const x = Math.random() * (window.innerWidth - 150);
-    const y = Math.random() * (window.innerHeight - 80);
+    setTimeout(() => {
 
-    noBtn.style.position = "fixed";
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+        questionPage.classList.remove("hidden");
+
+        typeText();
+
+    },400);
 
 });
 
-// YES button
-yesBtn.addEventListener("click", () => {
+// ---------- Typewriter ----------
 
-    yay.classList.remove("hidden");
+function typeText(){
 
-    launchConfetti();
+    const text = "Hey Teena... I have a tiny question for you ❤️";
 
-});
+    let i=0;
 
-// Resize canvas
-window.addEventListener("resize", () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-});
+    typing.innerHTML="";
 
-// ----------------------------
-// Confetti
-// ----------------------------
+    const type = setInterval(()=>{
 
-function launchConfetti(){
+        typing.innerHTML += text.charAt(i);
 
-    let pieces = [];
+        i++;
 
-    for(let i=0;i<250;i++){
+        if(i>=text.length){
 
-        pieces.push({
-
-            x:Math.random()*canvas.width,
-            y:-20,
-
-            size:Math.random()*8+4,
-
-            speed:Math.random()*5+3,
-
-            color:`hsl(${Math.random()*360},100%,60%)`
-
-        });
-
-    }
-
-    function animate(){
-
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-
-        pieces.forEach(p=>{
-
-            p.y += p.speed;
-
-            ctx.beginPath();
-
-            ctx.fillStyle = p.color;
-
-            ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-
-            ctx.fill();
-
-        });
-
-        if(pieces.some(p=>p.y<canvas.height)){
-
-            requestAnimationFrame(animate);
+            clearInterval(type);
 
         }
 
+    },55);
+
+}
+
+// ---------- NO Button ----------
+
+noBtn.addEventListener("mouseenter",moveButton);
+
+noBtn.addEventListener("click",moveButton);
+
+function moveButton(){
+
+    const x=Math.random()*(window.innerWidth-180);
+
+    const y=Math.random()*(window.innerHeight-80);
+
+    noBtn.style.position="fixed";
+    noBtn.style.left=x+"px";
+    noBtn.style.top=y+"px";
+
+    noBtn.innerHTML=messages[msg];
+
+    msg++;
+
+    if(msg>=messages.length){
+
+        msg=0;
+
     }
 
-    animate();
+}
+
+// ---------- YES ----------
+
+yesBtn.addEventListener("click",()=>{
+
+    questionPage.classList.add("hidden");
+
+    success.classList.remove("hidden");
+
+    hearts();
+
+    fireworks();
+
+});
+
+// ---------- Music ----------
+
+musicBtn.addEventListener("click",()=>{
+
+window.open(
+"https://www.youtube.com/results?search_query=Until+I+Found+You+Stephen+Sanchez",
+"_blank"
+);
+
+});
+
+// ---------- Floating Hearts ----------
+
+function hearts(){
+
+    for(let i=0;i<50;i++){
+
+        let heart=document.createElement("div");
+
+        heart.innerHTML="💖";
+
+        heart.style.position="fixed";
+
+        heart.style.left=Math.random()*100+"vw";
+
+        heart.style.bottom="-30px";
+
+        heart.style.fontSize=(20+Math.random()*30)+"px";
+
+        heart.style.animation=`float ${4+Math.random()*4}s linear forwards`;
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+
+            heart.remove();
+
+        },8000);
+
+    }
+
+}
+
+// ---------- Fireworks ----------
+
+const canvas=document.getElementById("canvas");
+
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+window.addEventListener("resize",()=>{
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+});
+
+function fireworks(){
+
+let particles=[];
+
+for(let i=0;i<250;i++){
+
+particles.push({
+
+x:canvas.width/2,
+
+y:canvas.height/2,
+
+dx:(Math.random()-0.5)*10,
+
+dy:(Math.random()-0.5)*10,
+
+size:2+Math.random()*4,
+
+life:100,
+
+color:`hsl(${Math.random()*360},100%,65%)`
+
+});
+
+}
+
+animate();
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+particles.forEach((p,index)=>{
+
+p.x+=p.dx;
+
+p.y+=p.dy;
+
+p.life--;
+
+ctx.beginPath();
+
+ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+
+ctx.fillStyle=p.color;
+
+ctx.fill();
+
+if(p.life<=0){
+
+particles.splice(index,1);
+
+}
+
+});
+
+if(particles.length>0){
+
+requestAnimationFrame(animate);
+
+}
+
+}
 
 }
